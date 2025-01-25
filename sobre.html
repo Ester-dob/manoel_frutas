@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  	<meta name="description" content="Site de frutas frescas direto da feira para sua casa. Confira nossas frutas da estação e receitas especiais!">
+ 	<meta name="keywords" content="frutas frescas, feira, entrega de frutas, alimentação saudável">
+ 	<meta name="author" content="Manoel Frutas">
+
+  	<style>
+		body {margin: 0;}
+
+		ul.topnav {
+ 	 	list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #3b683d;
+		}
+
+		ul.topnav li {float: left;}
+
+		ul.topnav li a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+		}
+
+		ul.topnav li a:hover:not(.active) {background-color: #d67a16;}
+
+		ul.topnav li.active a {background-color: #f7931e;}
+
+		ul.topnav li.right {float: right;}
+
+		div.col-sm-12{
+			height: auto;
+			max-width: 100%;
+			text-align: center;
+			justify-content: center;
+			align-items: center;
+			padding: 10px;
+		}
+
+		div.col-sm-8{
+					}
+
+		div.col-sm-4{
+			height: auto;
+			text-align: center;
+			justify-content: center;
+			align-items: center;
+			padding: 10px;		}
+
+		div.col-sm-2{
+			background-color: hotpink;
+			height: 300px;
+		}
+
+		.laranja a {
+        color: #d67a16; /* Cor laranja */
+    	}
+
+   		.verde a {
+        color: #3b683d; /* Cor verde */
+    	}
+
+   		.laranja a:hover,
+    	.verde a:hover {
+        text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+    	}
+
+		div.carousel {
+    	width: 70%;             /* Define a largura do carrossel */
+    	margin: 0 auto;         /* Centraliza horizontalmente */
+    	max-width: 500px;       /* Limita a largura máxima do carrossel */
+		}
+
+		div..carousel-inner {
+            display: flex;
+            justify-content: center; /* Centraliza os itens horizontalmente */
+            align-items: center;     /* Centraliza verticalmente */
+        }
+
+		div.carousel-item img {
+    	width: 100%;            /* As imagens irão preencher 100% da largura do item */
+   		height: auto;           /* A altura será ajustada automaticamente para manter a proporção */
+   		object-fit: contain;    /* Garante que as imagens sejam exibidas corretamente */
+		}
+
+		
+
+		 footer {
+    	background-color: #3b683d;
+    	color: white;
+    	padding: 20px;
+    	text-align: center;
+		}
+
+			.footer-content {
+    		display: flex;
+    		justify-content: space-between;
+    		align-items: center;
+    		max-width: 1200px;
+    		margin: 0 auto;
+			}
+
+			.address {
+    		flex: 1;
+    		text-align: left;
+			}
+
+			.social-media {
+    		flex: 1;
+    		text-align: right;
+			}
+
+			.social-icon {
+   			 margin: 0 10px;
+    		display: inline-block;
+			}
+
+			.social-icon img {
+    		width: 30px; /* Tamanho dos ícones */
+    		height: auto;
+			}
+
+			.social-icon img:hover {
+    		transform: scale(1.1); /* Aumenta ligeiramente o ícone ao passar o mouse */
+			}
+
+			.social-icon:hover {
+   			 opacity: 0.7; /* Efeito de hover nos ícones */
+			}
+
+		@media screen and (max-width: 600px) {
+	  	ul.topnav li.right, 
+  		ul.topnav li {float: none;}
+  		.container {
+  			margin-left: 0;
+  			margin-right: 0;
+  		}
+		}
+
+	</style>
+
+	<title>Grid</title>
+</head>
+<body>
+	<ul class="topnav">
+  		<li><a href="index.html">Início</a></li>
+  		<li><a href="frutas.html">Frutas</a></li>
+  		<li><a href="receitas.html">Receitas</a></li>
+  		<li class="active right"><a href="sobre.html">Sobre</a></li>
+	</ul>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">	
+				<img src="imagem/manoelfrutas.png" alt="Logo Manoel frutas" width="20%"><br><br>
+				<p><em> "Frutas frescas direto para você"</em></p><hr>
+			</div>	
+		</div>
+
+		<div class="row">
+		<div class="col-sm-8">	
+				<h1>Quem Somos</h1><br><br>
+				<div class="mis">
+				<h3>Sobre a empresa</h3>
+				</div>
+
+				<p>Somos uma empresa de entrega de frutas frescas e selecionadas, direto da feira livre para sua casa. Valorizamos produtos locais e frescos para garantir o sabor e a qualidade em cada pedido.</p><br>
+				
+				<div class="mis">
+				<h4><em>Missão</em></h4>
+				</div>
+				<p>Levar até você frutas frescas e saborosas com praticidade, promovendo uma alimentação saudável e sustentável.</p><br>
+
+				<div class="mis">
+				<h4><em>Visão</em></h4>
+				</div>
+				<p>Ser a escolha número um para quem busca frutas frescas com a conveniência da entrega em casa, valorizando sempre o pequeno produtor e a qualidade dos alimentos.</p><br>
+
+				<div class="mis">
+				<h4><em>Valores</em></h4>
+				</div>
+				<p>-Compromisso com a qualidade.</p>
+				<p>-Respeito com o alimento e com os consumidores.</p>
+				<p>-Garantir praticidade aos nossos clientes.</p><br>
+
+		</div>
+		</div>
+	</div>
+
+
+
+<footer>
+        <div class="footer-content">
+            <!-- Endereço -->
+            <div class="contato">
+                <p>Contato: (11) 94004-6028</p>
+            </div>
+
+            <!-- Redes Sociais -->
+            <div class="social-media">
+                <a href="https://wa.me/5511940137658" target="_blank" class="social-icon">
+        			<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+    			</a>
+                <a href="https://www.instagram.com" target="_blank" class="social-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+                </a>
+               
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

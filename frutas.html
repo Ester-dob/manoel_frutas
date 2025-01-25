@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  	<meta name="description" content="Site de frutas frescas direto da feira para sua casa. Confira nossas frutas da estação e receitas especiais!">
+ 	<meta name="keywords" content="frutas frescas, feira, entrega de frutas, alimentação saudável">
+ 	<meta name="author" content="Manoel Frutas">
+
+  	<style>
+		html, body {
+			height: 100%; /* Garante que a página ocupa toda a altura */
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			overflow-x: hidden;}
+
+		body {margin: 0;
+			flex: 1;}
+
+		ul.topnav {
+ 	 	list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #3b683d;
+  		position: fixed; /* Torna o menu fixo */
+		width: 100%; /* Garante que o menu ocupe toda a largura */
+		top: 0; /* Fixa no topo da página */
+		z-index: 999; /* Coloca o menu acima dos outros elementos */
+		}
+
+		ul.topnav li {float: left;}
+
+		ul.topnav li a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+		}
+
+		ul.topnav li a:hover:not(.active) {background-color: #d67a16;}
+
+		ul.topnav li a.active {background-color: #f7931e;}
+
+		ul.topnav li.right {float: right;}
+
+		div.col-sm-12{
+			height: auto;
+			max-width: 100%;
+			text-align: center;
+			justify-content: center;
+			align-items: center;
+			padding: 10px;
+		}
+
+		div.col-sm-8{
+			background-color: greenyellow;
+			height: 300px;
+		}
+
+		div.col-sm-4{
+			height: auto;
+			max-width: 100%;
+			text-align: center;
+			justify-content: center;
+			align-items: center;
+			padding: 10px;
+			box-sizing: border-box;}
+
+
+		.laranja a {
+        color: #d67a16; /* Cor laranja */
+    	}
+
+    	.verde a {
+        color: #3b683d; /* Cor verde */
+    	}
+
+    	.laranja a:hover,
+    	.verde a:hover {
+        text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+    	}
+
+    	.laranja-mes{
+    		background-color: #d67a16;
+    	}
+
+    	.verde-mes{
+    		background-color: #5aa65d;
+
+    	}
+
+		div.carousel {
+    	width: 70%;             /* Define a largura do carrossel */
+    	margin: 0 auto;         /* Centraliza horizontalmente */
+    	max-width: 500px;       /* Limita a largura máxima do carrossel */
+		}
+
+		div..carousel-inner {
+            display: flex;
+            justify-content: center; /* Centraliza os itens horizontalmente */
+            align-items: center;     /* Centraliza verticalmente */}
+
+		div.carousel-item img {
+    	width: 100%;            /* As imagens irão preencher 100% da largura do item */
+   		height: auto;           /* A altura será ajustada automaticamente para manter a proporção */
+   		object-fit: contain;    /* Garante que as imagens sejam exibidas corretamente */
+		}
+
+
+		 footer {
+    	background-color: #3b683d;
+    	color: white;
+    	padding: 20px;
+    	text-align: center;
+    	bottom: 0;
+		width: 100%;
+		}
+
+			.footer-content {
+    		display: flex;
+    		justify-content: space-between;
+    		align-items: center;
+    		max-width: 1200px;
+    		margin: 0 auto;
+			}
+
+			.address {
+    		flex: 1;
+    		text-align: left;
+			}
+
+			.social-media {
+    		flex: 1;
+    		text-align: right;
+			}
+
+			.social-icon {
+   			 margin: 0 10px;
+    		display: inline-block;
+			}
+
+			.social-icon img {
+    		width: 30px; /* Tamanho dos ícones */
+    		height: auto;
+			}
+
+			.social-icon img:hover {
+    		transform: scale(1.1); /* Aumenta ligeiramente o ícone ao passar o mouse */
+			}
+
+			.social-icon:hover {
+   			 opacity: 0.7; /* Efeito de hover nos ícones */
+			}
+
+			#frutas-janeiro, #frutas-fevereiro, #frutas-marco, #frutas-abril, #frutas-maio, #frutas-junho, #frutas-julho, #frutas-agosto, #frutas-setembro, #frutas-outubro, #frutas-novembro, #frutas-dezembro {display: none;}
+
+			@media screen and (max-width: 600px) {
+	  		ul.topnav li.right, 
+  			ul.topnav li {float: none;}
+  			.container {
+  				margin-left: 0;
+  				margin-right: 0;
+  				margin-top: 200px;
+  				flex: 0 0 100%;
+  				max-width: 100%;
+  				
+  			}
+			}
+
+			@media screen and (min-width: 600px) {
+  			.container {
+				margin-top: 50px;
+				flex: 1;}
+			}
+
+	</style>
+
+	<title>Frutas</title>
+</head>
+<body>
+	<ul class="topnav">
+  		<li><a href="index.html">Início</a></li>
+  		<li><a class="active" href="frutas.html">Frutas</a></li>
+  		<li><a href="receitas.html">Receitas</a></li>
+  		<li class="right"><a href="sobre.html">Sobre</a></li>
+	</ul>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">	
+				<img src="imagem/manoelfrutas.png" alt="Logo Manoel frutas" width="20%"><br><br>
+				<p><em> "Frutas frescas direto para você"</em></p><hr>
+			</div>	
+		</div>
+
+
+		<!-- Seção Frutas com links para os meses -->
+		<div class="row section" id="frutas">
+			<div class="col-sm-12">
+				<h2>Frutas da Estação</h2>
+				<p>Escolha o mês e descubra as frutas frescas disponíveis!</p>
+			</div>
+		</div>
+
+		<div class="row section" id="frutas">
+			<div class="col-sm-3">
+				<!-- Lista de links para cada mês -->
+				<ul class="verde frutas-links">
+					<li><a href="javascript:void(0);" onclick="mostrarFrutas('janeiro')"><b>Janeiro</b></a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<!-- Lista de links para cada mês -->
+				<ul class="laranja frutas-links">
+					<li><a href="javascript:void(0);" onclick="mostrarFrutas('fevereiro')"><b>Fevereiro</b></a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<!-- Lista de links para cada mês -->
+				<ul class="verde frutas-links">
+					<li><a href="javascript:void(0);" onclick="mostrarFrutas('marco')"><b>Março</b></a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<!-- Lista de links para cada mês -->
+				<ul class="laranja frutas-links">
+					<li><a href="javascript:void(0);" onclick="mostrarFrutas('abril')"><b>Abril</b></a></li>
+				</ul>
+			</div>
+
+		</div>
+
+		<div class="row section" id="frutas">
+			<div class="col-sm-3">
+				<!-- Lista de links para cada mês -->
+				<ul class="laranja frutas-links">
+					<li id="laranja"><a href="javascript:void(0);" onclick="mostrarFrutas('maio')"><b>Maio</b></a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<!-- Lista de links para cada mês -->
+				<ul class="verde frutas-links">
+					<li><a href="javascript:void(0);" onclick="mostrarFrutas('junho')"><b>Junho</b></a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<!-- Lista de links para cada mês -->
+				<ul class="laranja frutas-links">
+					<li><a href="javascript:void(0);" onclick="mostrarFrutas('julho')"><b>Julho</b></a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<!-- Lista de links para cada mês -->
+				<ul class="verde frutas-links">
+					<li><a href="javascript:void(0);" onclick="mostrarFrutas('agosto')"><b>Agosto</b></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="row section" id="frutas">
+			<div class="col-sm-3">
+				<!-- Lista de links para cada mês -->
+				<ul class="verde frutas-links">
+					<li><a href="javascript:void(0);" onclick="mostrarFrutas('setembro')"><b>Setembro</b></a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<!-- Lista de links para cada mês -->
+				<ul class="laranja frutas-links">
+					<li><a href="javascript:void(0);" onclick="mostrarFrutas('outubro')"><b>Outubro</b></a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<!-- Lista de links para cada mês -->
+				<ul class="verde frutas-links">
+					<li><a href="javascript:void(0);" onclick="mostrarFrutas('novembro')"><b>Novembro</b></a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<!-- Lista de links para cada mês -->
+				<ul class="laranja frutas-links">
+					<li><a href="javascript:void(0);" onclick="mostrarFrutas('dezembro')"><b>Dezembro</b></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Seção Frutas de janeiro -->
+		<div class="row section" id="frutas-janeiro">
+			<div class="col-sm-12">
+				<h2 class="verde-mes">Frutas de janeiro</h2>
+				<p>As frutas frescas de Janeiro incluem: Melancia, Melão, Manga, entre outras.</p>
+			</div>	
+
+			<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/achachairu.png" alt="Achachairu" width="100%" loading="lazy"><br>
+				<h3>Achachairu:</h3>
+				<p>Fruta boliviana, pouco conhecida no Brasil e até mesmo na Bolívia. Tem sido cultivada nas regiões Norte, Nordeste e Sudeste do Brasil.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/carambola.png" alt="carambola" width="100%" loading="lazy"><br>
+				<h3>Carambola:</h3>
+				<p>De origem asiática, chegou ao Brasil em 1817, sendo encontrada em pernambuco. Sua árvore começa a dar frutos com cerca de 4 anos de cultivo.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/figo.png" alt="figo" width="100%" loading="lazy"><br>
+				<h3>Figo:</h3>
+				<p>Esse não é precisamento um fruto, mas uma flor-invertida, ou seja, floresce "para dentro". Possui poucas calorias e tem diversos antioxidantes, benéficos para o organismo.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/maracuja.png" alt="maracuja" width="100%" loading="lazy"><br>
+				<h3>Maracujá:</h3>
+				<p>Originário da América Tropical e subtropical. Ajuda a controlar os níveis de colesterol e glicose, além de regular a pressão sanguínea.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/melancia.png" alt="Melacia pedaço" width="100%" loading="lazy"><br>
+				<h3>Melancia:</h3>
+				<p>Surgiu na África e é relatada em registros milenares. Reduz o colesterol, isso ajuda a prevenir alguns tipos de câncer, como o de prostata.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/melao1.png" alt="melão" width="100%" loading="lazy"><br>
+				<h3>Melão:</h3>
+				<p>Essa fruta com origem africana e asiática, hoje em dia é cultivada em todo o mundo. Atua como antioxidante, diminui a retenção de líquidos e previni o envelhecimento.</p>
+			</div>
+		</div>
+
+		</div>
+
+		<!-- Seção Frutas de fevereiro -->
+		<div class="row section" id="frutas-fevereiro">
+			<div class="col-sm-12">
+				<h2 class="laranja-mes">Frutas de Fevereiro</h2>
+				<p>Frutas típicas de Fevereiro incluem: Maçã, Figo, Limão, entre outras.</p>
+			</div>	
+
+			<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/figo1.png" alt="figo" width="100%" loading="lazy"><br>
+				<h3>Figo:</h3>
+				<p>Ajuda no sistema intestinal, a controlar os níveis de colesterol e a pressão cardíaca. Combate a prisão de ventre e ajuda na perda de peso.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/goiaba.png" alt="goiaba" width="100%" loading="lazy"><br>
+				<h3>Goiaba:</h3>
+				<p>Os estados de Pernambuco, Rio de janeiro e são Paulo são responsáveis por 80% da produçao nacional dessa fruta, que ajuda a prevenir o câncer de prostata.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/limao.png" alt="Limão Taiti" width="100%" loading="lazy"><br>
+				<h3>Limão Taiti:</h3>
+				<p>De origem tropical, é fonte de vitamas C, A e do complexo B. Também é rico em ferro, zinco, fósforo, magnésio e potássio.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/fuji1.png" alt="Maçã Fuji" width="100%" loading="lazy"><br>
+				<h3>Maçã Fuji:</h3>
+				<p>Trazida do japão, pelos imigrantes japoneses. Previni doenças cardiovasculares, diabetes, combate a prisão de ventre e aumenta a imunidade do corpo.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/gala1.png" alt="Maçã Gala" width="100%" loading="lazy"><br>
+				<h3>Maçã Gala:</h3>
+				<p>Acredita-se que essa fruta tem origem na Nova Zelândia. Rica em vitaminas B1, B2 e C, fortalecendo o sistema imunológico, além de ser antioxidante e prevenir doenças de pele.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/formosa.png" alt="Mamão Formosa" width="100%" loading="lazy"><br>
+				<h3>Mamão Formosa:</h3>
+				<p>Combate a prisão de ventre, melhora a digestão, diminui o colesterol, facilita a perda de peso, previne o envelhecimento precoce e equilibra a glicose do sangue.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/palmer.png" alt="Manga Palmer" width="100%" loading="lazy"><br>
+				<h3>Manga Palmer:</h3>
+				<p>Chegou ao Brasil em 1960, contém vitamina A, combate a anemia e o estresse, além de ter ação antibacteriana.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/pinha.png" alt="Pinha" width="100%" loading="lazy"><br>
+				<h3>Pinha:</h3>
+				<p>Produzida nos estados de Alagoas, Bahia e São Paulo, ela ajuda a fortalecer o sistema imunológico, controla a pressão arterial e regula o funcionamento do intestino.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/pitaya.png" alt="Pitaya" width="100%" loading="lazy"><br>
+				<h3>Pitaya:</h3>
+				<p>Essa fruta é rica em cálcio, magnésio e fósforo, que são ótimos para a saúde dos ossos. É indicado para que tem osteoporose ou osteopenia.</p>
+			</div>
+		</div>
+
+		</div>
+
+		<!-- Seção Frutas de marco -->
+		<div class="row section" id="frutas-marco">
+			<div class="col-sm-12">
+				<h2 class="verde-mes">Frutas de Março</h2>
+				<p>Entre as frutas de Março, temos: Caqui, Kiwi, Pêssego e outras frutas sazonais.</p>
+			</div>
+
+			<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/ameixa.png" alt="ameixa" width="100%" loading="lazy"><br>
+				<h3>Ameixa:</h3>
+				<p>Possui vitaminas A, C e K, além de ter concentrações de potássio, magnésio, ferro, zinco, fósforo, cálcio.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/caqui2.png" alt="caqui" width="100%" loading="lazy"><br>
+				<h3>Caqui:</h3>
+				<p>Ela previni a diabetes, ajuda a emagrer, mantém a saúde dos olhos, combate a prisão de ventre e o estresse, além de aumentar a imunidade.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/gala.png" alt="Maçã Gala" width="100%" loading="lazy"><br>
+				<h3>Maçã Gala:</h3>
+				<p>Rica em vitaminas B1, B2 e C, fortalecendo o sistema imunológico, além de ser antioxidante e prevenir doenças de pele.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/cravo.png" alt="Mexerica Cravo" width="100%" loading="lazy"><br>
+				<h3>Mexerica Cravo:</h3>
+				<p>Tem ações anti-inflamatórias, diuréticas e tônicas. Além de ser um laxante natural, mas é preciso consumir seu bagaço para sua ação laxante.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/kiwi.png" alt="Kiwi" width="100%" loading="lazy"><br>
+				<h3>Kiwi:</h3>
+				<p>De origem chinesa, tem alta densidade nutritiva. Contém vitaminas, fibras e antioxidantes, capaz de prevenir doenças oculares e cardíacas.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/pessego.png" alt="Pêssego" width="100%" loading="lazy"><br>
+				<h3>Pêssego:</h3>
+				<p>Contém vitamina A, C e B, auxilia no combate de infecções e no crescimento saudável das células dos ossos, além de evitar problemas de pele.</p>
+			</div>
+		</div>
+
+		</div>
+
+		<!-- Seção Frutas de abril -->
+		<div class="row section" id="frutas-abril">
+			<div class="col-sm-12">
+				<h2 class="laranja-mes">Frutas de Abril</h2>
+				<p>Abril é o mês de: maçã, pera, laranja, entre outras.</p>
+			</div>
+
+			<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/carambola.png" alt="carambola" width="100%" loading="lazy"><br>
+				<h3>Carambola:</h3>
+				<p>Atua como anti-inflamatório natural, diminui o inchaço do corpo, é antimicrobiana. Fortelece unhas, cabelos e pele, além de ajudar a regular a glicose no sangue.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/persia.png" alt="goiaba" width="100%" loading="lazy"><br>
+				<h3>Lima da Pérsia:</h3>
+				<p>Fonte de vitamina C, auxilia na melhora do sistema imunológico. Também contém cálcio, vitaminas do complexo B, potássio e ferro, ajudando a combater a anemia.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/morango2.png" alt="Morango" width="100%" loading="lazy"><br>
+				<h3>Morango:</h3>
+				<p>Além de ser uma fruta afrodisíaca, o morango é antioxidante, melhora a capacidade mental, previni doenças cardiovasculares e alguns tipos de câncer.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/nectarina.png" alt="Nectarina" width="100%" loading="lazy"><br>
+				<h3>Nectarina:</h3>
+				<p>Atua no equilíbrio do metabolismo, previni câimbras e fortalece o sistema imunológico, devido a presença de fósforo, potássio e cálcio.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/nespera.png" alt="Nêspera" width="100%" loading="lazy"><br>
+				<h3>Nêspera:</h3>
+				<p>Ajuda a equilibrar a pressão arterial e a perder peso, melhosa a saúde dos olhos, além de fortalecer os ossos e os dentes, devido suas vitaminas, minerais, antioxidantes e fibras.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/perap.png" alt="Pêra" width="100%" loading="lazy"><br>
+				<h3>Pêra:</h3>
+				<p>Fruta típica da região chinesa, ela fornece nutrientes importantes, como vitaminas A, C e E, fibras, potássio, magnésio e cálcio.</p>
+			</div>
+		</div>
+
+		</div>
+
+		<!-- Seção Frutas de maio -->
+		<div class="row section" id="frutas-maio">
+			<div class="col-sm-12">
+				<h2 class="laranja-mes">Frutas de Maio</h2>
+				<p>Em Maio, podemos encontrar frutas como: Atemoia, Cereja, dentre tantas outras.</p>
+			</div>	
+
+			<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/atemoia.png" alt="Atemoia" width="100%" loading="lazy"><br>
+				<h3>Atemoia:</h3>
+				<p>Da mesma família que a pinha e graviola, ela atua na redução da pressão arterial, além de ser fonte de energia para o corpo.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/cereja.png" alt="cereja" width="100%" loading="lazy"><br>
+				<h3>Cereja:</h3>
+				<p>Originária da Ásia menor e utilizada como remédio natural na Grécia e na Roma Antida, ela reduz dores musculares, ajuda a controlar a glicemia, melhora a saúde dos olhos e da pele.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/melancia.png" alt="Melancia" width="100%" loading="lazy"><br>
+				<h3>Melancia:</h3>
+				<p>Reduz possíveis deficiências nutricionais, ajuda no combate de doenças virais e infecções, além de proteger e melhorar o sistema imunológico.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/cravo.png" alt="Mexerica Cravo" width="100%" loading="lazy"><br>
+				<h3>Mexerica Cravo:</h3>
+				<p>Rica em vitaminas A, B e C, possui cálcio, magnésio, potássio, fósforo e outros nutrientes. Combate o envelhecimento precoce e fornece nutrição.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/Morango.png" alt="Morango" width="100%" loading="lazy"><br>
+				<h3>Morango:</h3>
+				<p>Além de ser uma fruta afrodisíaca, o morango é antioxidante, melhora a capacidade mental, previni doenças cardiovasculares e alguns tipos de câncer.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/nespera.png" alt="Nespera" width="100%" loading="lazy"><br>
+				<h3>Nêspera:</h3>
+				<p>Ajuda a equilibrar a pressão arterial e a perder peso, melhosa a saúde dos olhos, além de fortalecer os ossos e os dentes, devido suas vitaminas, minerais, antioxidantes e fibras.</p>
+			</div>
+		</div>
+
+		</div>
+
+		<!-- Seção Frutas de Junho-->
+		<div class="row section" id="frutas-junho">
+			<div class="col-sm-12">
+				<h2 class="verde-mes">Frutas de Junho</h2>
+				<p>Em junho, podemos encontrar frutas como: Carambola, Cupuaçu e grande variedade de laranjas, como a Bahia.</p>
+			</div>	
+
+			<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/carambola3.png" alt="carambola" width="100%" loading="lazy"><br>
+				<h3>Carambola:</h3>
+				<p>Tem papel importante na prevenção de doenças cardiovasculares. No entanto, essa futa não pode ser consumida por pessoas com doenças renais, artrite, reumatismo e gota.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/cupuacu.png" alt="Cupuaçu" width="100%" loading="lazy"><br>
+				<h3>Cupuaçu:</h3>
+				<p>Indicado para substituir o pão no café-da-mãe, combate cólicas menstruais, aumenta a imunidade, trata doenças respiratórias e age como analgésico natural.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/bahia.png" alt="Laranja Baía" width="100%" loading="lazy"><br>
+				<h3>Laranja Bahia:</h3>
+				<p>Além de controlar a pressão alta e proteger contra doenças vasculares, também tem ação antioxidante, atuando na proteção da pele contra raios solares.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/morgote.png" alt="Mexerica Morgote" width="100%" loading="lazy"><br>
+				<h3>Mexerica Morgote:</h3>
+				<p>Promove a saúde da pele e dos olhos, reduz inflamações, fortalece o sistema imunológico e auxilia na perda de peso.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/ponca.png" alt="Mexerica Poncã" width="100%" loading="lazy"><br>
+				<h3>Mexerica Poncã:</h3>
+				<p>Excelente fonte de vitamina C, ajuda a prevenir gripes e resfriados. Surgiu entre o cruzamento do pomelo e tangerinas chinesas.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/melao1.png" alt="Melão" width="100%" loading="lazy"><br>
+				<h3>Melão:</h3>
+				<p>Originário da África e da Ásia, pertence a família da melancia e do pepino. Rico em vitamina C, indicado para a prevenção de gripes, resfriados e pneumonia. Previne e retarda doenças cardíacas, além de hidratar o corpo.</p>
+			</div>
+		</div>
+
+		</div>
+
+		<!-- Seção Frutas de julho -->
+		<div class="row section" id="frutas-julho">
+			<div class="col-sm-12">
+				<h2 class="laranja-mes">Frutas de Julho</h2>
+				<p>Em julho, podemos encontrar frutas como: Abacate, Atemoia e o Maracujá Doce. </p>
+			</div>	
+
+			<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/abacate.png" alt="Abacate" width="100%" loading="lazy"><br>
+				<h3>Abacate:</h3>
+				<p>Rico em potássio e óleos naturais, auxilia no combate ao colesterol, tem ação antioxidante, regula a atividade muscular e ajuda na saúde da pele, unha e cabelo.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/atemoia.png" alt="atemoia" width="100%" loading="lazy"><br>
+				<h3>Atemoia:</h3>
+				<p>Da mesma família que a pinha e graviola, ela atua na redução da pressão arterial, além de ser fonte de energia para o corpo.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/laranjali.png" alt="Laranja Lima" width="100%" loading="lazy"><br>
+				<h3>Laranja Lima:</h3>
+				<p>Ajuda a combater a formação de coágulos no sangue, controla o colesterol e fortalece o sistema imunológico. Rico em vitamina A, cálcio e potássio.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/gala2.png" alt="Maça Gala" width="100%" loading="lazy"><br>
+				<h3>Maçã Gala:</h3>
+				<p>Rica em vitaminas B1, B2 e C, fortalecendo o sistema imunológico, além de ser antioxidante e prevenir doenças de pele.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/maracujadoce.png" alt="Maracujá Doce" width="100%" loading="lazy"><br>
+				<h3>Maracujá Doce:</h3>
+				<p>Ajuda no controle dos níveis de colesterol e glicose, regula a pressão sanguínea, ajuda na absorção dos carboidratos e protege as células que produzem insulina.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/morango.png" alt="Morango" width="100%" loading="lazy"><br>
+				<h3>Morango:</h3>
+				<p>Além de ser uma fruta afrodisíaca, o morango é antioxidante, melhora a capacidade mental, previni doenças cardiovasculares e alguns tipos de câncer.</p>
+			</div>
+		</div>
+
+		</div>
+
+		<!-- Seção Frutas de Agosto -->
+		<div class="row section" id="frutas-agosto">
+			<div class="col-sm-12">
+				<h2 class="verde-mes">Frutas de Agosto</h2>
+				<p>Em Agosto, podemos encontrar frutas como: </p>
+			</div>
+
+			<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/abacate.png" alt="abacate" width="100%" loading="lazy"><br>
+				<h3>Abacate:</h3>
+				<p>Rico em potássio e óleos naturais, auxilia no combate ao colesterol, tem ação antioxidante, regula a atividade muscular e ajuda na saúde da pele, unha e cabelo.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/goiabarj.png" alt="caju" width="100%" loading="lazy"><br>
+				<h3>Goiaba Romeu e Julieta:</h3>
+				<p>Essa fruta é afusão entre a Goiaba branca e a vermelha, destaca-se por ser muito doce, mas com um leve toque azedo. Rica em fibras, incada para casos de prisão de ventre.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/jabuticaba.png" alt="jabuticaba" width="100%" loading="lazy"><br>
+				<h3>Jabuticaba:</h3>
+				<p>Contém ferro, fosfóro e vitamina C. Protege contra danos hepáticos e a perda de colágeno, além de aumentar o desempenho cognitivo.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/morango2.png" alt="morango" width="100%" loading="lazy"><br>
+				<h3>Morango:</h3>
+				<p>Além de ser uma fruta afrodisíaca, o morango é antioxidante, melhora a capacidade mental, previni doenças cardiovasculares e alguns tipos de câncer</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/morgote.png" alt="morgote" width="100%" loading="lazy"><br>
+				<h3>Mexerica Morgote:</h3>
+				<p>Promove a saúde da pele e dos olhos, reduz inflamações, fortalece o sistema imunológico e auxilia na perda de peso.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/tangerina.png" alt="tangerina" width="100%" loading="lazy"><br>
+				<h3>Tangerina:</h3>
+				<p>Tem efeito diurético, digestivo e aumenta a eficiência física, serve como laxante se for consumido com o bagaço, além de prevenir a arterioesclerose.</p>
+			</div>
+		</div>
+
+		</div>
+
+		<!-- Seção Frutas de Setembro -->
+		<div class="row section" id="frutas-setembro">
+			<div class="col-sm-12">
+				<h2 class="verde-mes">Frutas de Setembro</h2>
+				<p>Em Setembro, podemos encontrar frutas nem tão convencionais, como: Açai, Amora, Tamarindo, dentre outras.</p>
+			</div>
+
+			<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/abiu.png" alt="Abiu" width="100%" loading="lazy"><br>
+				<h3>Abiu:</h3>
+				<p>Fonte de vitaminas, fibras, cálcio, fósforo, ferro, carboidratos e sais minerais. É indicado para que tem anemia, por purificar o sangue, graças a clorofila.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/acai.png" alt="Açai" width="100%" loading="lazy"><br>
+				<h3>Açai:</h3>
+				<p>Ajuda no sistema imunológico, tem poder cicatrizante, além de ser fonte de energia. Melhora o funcionamento do intestino e é rico em carboidrato e nutrientes.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/amora.png" alt="Amora" width="100%" loading="lazy"><br>
+				<h3>Amora:</h3>
+				<p>Ajuda na prevenção da osteoporose, contém vitamina K, A e C, além de magnésio, ferro e potássio. Previni o envelhecimento precoce e regula o funcionamento do intestino.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/cupuacu.png" alt="Cupuaçu" width="100%" loading="lazy"><br>
+				<h3>Cupuaçu:</h3>
+				<p>Rico em vitaminas A, B e C, ferro, fósforo, fibras e muitos outros nutrientes. É importante para a saúde dos ossos, tendões e ligamentos.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/lanjape.png" alt="Laranja Pêra" width="100%" loading="lazy"><br>
+				<h3>Laranja Pêra:</h3>
+				<p>Possui propriedades antioxidantes, rica em vitamina C, sais minerais como o cálcio, potássio, sódio e fósforo e vitaminas do complexo B.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/tamarindo.png" alt="Tamarindo" width="100%" loading="lazy"><br>
+				<h3>Tamarindo:</h3>
+				<p>Previni e ajuda na recuperação de gripes e resfriados. Rica em vitamina A e C, além de ter muitas fibras, que ajudam a combater a prisão de ventre.</p>
+			</div>
+		</div>
+
+		</div>
+
+		<!-- Seção Frutas de Outubro -->
+		<div class="row section" id="frutas-outubro">
+			<div class="col-sm-12">
+				<h2 class="laranja-mes">Frutas de Outubro</h2>
+				<p>Em Outubro, podemos encontrar frutas que já antecipam o que vem para o fim doano, como: Ameixa, mangas e uvas.</p>
+			</div>	
+
+			<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/abacate.png" alt="abacate" width="100%" loading="lazy"><br>
+				<h3>Abacate:</h3>
+				<p>Rico em potássio e óleos naturais, auxilia no combate ao colesterol, tem ação antioxidante, regula a atividade muscular e ajuda na saúde da pele, unha e cabelo.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/ameixa2.png" alt="Ameixa" width="100%" loading="lazy"><br>
+				<h3>Ameixa:</h3>
+				<p>Possui vitaminas A, C e K, além de ter concentrações de potássio, magnésio, ferro, zinco, fósforo, cálcio.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/limao.png" alt="Limão" width="100%" loading="lazy"><br>
+				<h3>Limão:</h3>
+				<p>De origem tropical, é fonte de vitamas C, A e do complexo B. Também é rico em ferro, zinco, fósforo, magnésio e potássio.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/tomi.png" alt="Manga Tommy" width="100%" loading="lazy"><br>
+				<h3>Manga Tommy:</h3>
+				<p>Ótima fonte de antioxidantes, que ajuda a prevenir o envelhecimento precoce. Possui vitamina A, essencial para a saúde dos olhos.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/mamao.png" alt="Mamão Papaya" width="100%" loading="lazy"><br>
+				<h3>Papaya:</h3>
+				<p>Previni doenças como câncer, problemas cardíacos e alzheimer, além de facilitar a digestão, devido possuir antioxidantes e fibras. </p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/uvab.png" alt="Uva sem semente" width="100%" loading="lazy"><br>
+				<h3>Uva Sem Semente:</h3>
+				<p>Rica em vitamina C, é eficaz na prevenção de gripes e resfriados. Fortalece o sistema imunológico, tornando o corpo mais resistente a infecções.</p>
+			</div>
+		</div>
+
+		</div>
+
+		<!-- Seção Frutas de Novembro -->
+		<div class="row section" id="frutas-novembro">
+			<div class="col-sm-12">
+				<h2 class="verde-mes">Frutas de Novembro</h2>
+				<p>Em Novembro, podemos encontrar frutas mais tropicais como: Achachairu, Caju, Jaca, dentre outras.</p>
+			</div>	
+
+			<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/abacaxipe.png" alt="abacaxi" width="100%" loading="lazy"><br>
+				<h3>Abacaxi:</h3>
+				<p>Diminui o inchaço, ajuda na perda de peso, regula a pressão arterial, fortalece o sistema imune, auxilia na digestão, hidrata e é antioxidante, aliviando dores da artrite.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/achachairu.png" alt="achachairu" width="100%" loading="lazy"><br>
+				<h3>Achachairu:</h3>
+				<p>De origem boliviana, é típica da região amazônica. Rica em fósforo e cálcio, ajuda em cicatrizações, é antioxidante e anti-inflamatória.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/caju.png" alt="Caju" width="100%" loading="lazy"><br>
+				<h3>Caju:</h3>
+				<p>Previne doenças do sangue, fortalece o sistema imunológico, é afrodisíaco, combate o acúmulo de aç[ucar no sangue e controla o colesterol.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/jabuticaba.png" alt="jabuticaba" width="100%" loading="lazy"><br>
+				<h3>Jabuticaba:</h3>
+				<p>Contém ferro, fosfóro e vitamina C. Protege contra danos hepáticos e a perda de colágeno, além de aumentar o desempenho cognitivo.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/jaca.png" alt="jaca" width="100%" loading="lazy"><br>
+				<h3>Jaca:</h3>
+				<p>Contém vitaminas A, C, E, B6 e K, além de cobre e magnésio. Fortalece os ossos, auxilia na absorção de cálcio e diminui a perda óssea.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/laranjap.png" alt="laranja pera" width="100%" loading="lazy"><br>
+				<h3>Laranja Pêra:</h3>
+				<p>Possui propriedades antioxidantes, rica em vitamina C, sais minerais como o cálcio, potássio, sódio e fósforo e vitaminas do complexo B.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/mamao.png" alt="Mamão Papaya" width="100%" loading="lazy"><br>
+				<h3>Papaya:</h3>
+				<p>Previni doenças como câncer, problemas cardíacos e alzheimer, além de facilitar a digestão, devido possuir antioxidantes e fibras.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/pessego.png" alt="pessego" width="100%" loading="lazy"><br>
+				<h3>Pêssego:</h3>
+				<p>Contém vitamina A, C e B, auxilia no combate de infecções e no crescimento saudável das células dos ossos, além de evitar problemas de pele.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/uvarosa.png" alt="Uva Rosada" width="100%" loading="lazy"><br>
+				<h3>Uva Rosada:</h3>
+				<p>Combate a prisão de ventre, diminui o colesterol "ruim", previni a diabetes, além de ter ações anti-inflamatória e antimicrobiana. Rica em vitaminas A, B, C E e K.</p>
+			</div>
+		</div>
+			
+		</div>
+
+		<!-- Seção Frutas de Dezembro -->
+		<div class="row section" id="frutas-dezembro">
+			<div class="col-sm-12">
+				<h2 class="laranja-mes">Frutas de Dezembro</h2>
+				<p>Em Dezembro a temporada de altas e raras variedades inícia, podemos encontrar frutas como: Acerola, variedades de ameixas, Lichia, dentre outras.</p>
+			</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/abacaxipe.png" alt="abacaxi" width="100%" loading="lazy"><br>
+				<h3>Abacaxi Pérola:</h3>
+				<p>Tradicionalmente da Bahia, essa é a época de maior produção da fruta.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/acerola.png" alt="acerola" width="100%" loading="lazy"><br>
+				<h3>Acerola:</h3>
+				<p>Fruta produzida principalmente na região nordeste do Brasil, utilizada em especial para fazer sucos.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/ameixa.png" alt="ameixa" width="100%" loading="lazy"><br>
+				<h3>Ameixa:</h3>
+				<p>Produzida no sul do Brasil e em Minas Gerais, o Rio Grande do Sul é responsável por 42% da produção nacional.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/caju.png" alt="caju" width="100%" loading="lazy"><br>
+				<h3>Caju:</h3>
+				<p>Esse é um pseudofruto, produzido no nordeste, de origem brasileira. Diferente do pensamento popular, a castanha é a verdadeira fruta, a outra parte, utilizada principalmente em sucos, é floral.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/laranjali.png" alt="laranja lima" width="100%" loading="lazy"><br>
+				<h3>Laranja Lima:</h3>
+				<p>Surgiu no sudeste da Ásia, possui pouca acidez, ideal para o consumo de crianças, indicada para pessoas com complicações gástricas.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/laranjapera.png" alt="lichia" width="100%" loading="lazy"><br>
+				<h3>Laranja Pêra:</h3>
+				<p>Fruta típica da região sudeste, sendo o estado de São Paulo o principal produtor da fruta. Rica em vitamina C, cálcio e vitaminas do complexo B.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/lichia1.png" alt="lichia" width="100%" loading="lazy"><br>
+				<h3>Lichia:</h3>
+				<p>Fruta original da África e Asia, ela tem preços elevados devido a dificuldade e demora do cultivo. Sua árvore produz há cada dois anos.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/rosada.png" alt="uva" width="100%" loading="lazy"><br>
+				<h3>Uvas:</h3>
+				<p>Produzida no nordeste brasileiro, oferece grande variedade no final de ano, devido a alta produção nessa epóca. Variações: Rosada (de natal), Itália, rubi, sem semente, dentre outras.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/roma.png" alt="roma" width="100%" loading="lazy"><br>
+				<h3>Romã:</h3>
+				<p>Natural do mediterrâneo, é uma fruta produzida no sul do Brasil. Muito indicado no tratamento de infecções, prncipalmente na gargante, através de chá, suco, para gargarejo ou pelo consumo in natura.</p>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+<footer>
+        <div class="footer-content">
+            <!-- Endereço -->
+            <div class="contato">
+                <p>Contato: (11) 94004-6028</p>
+            </div>
+
+            <!-- Redes Sociais -->
+            <div class="social-media">
+                <a href="https://wa.me/5511940137658" target="_blank" class="social-icon">
+        			<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    			</a>
+                <a href="https://www.instagram.com" target="_blank" class="social-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                </a>
+               
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+		// Função para mostrar a seção do mês selecionado e ocultar as outras
+		function mostrarFrutas(mes) {
+			// Ocultar todas as seções de frutas
+			const meses = ['janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+			meses.forEach(function(m) {
+				document.getElementById('frutas-' + m).style.display = 'none';
+			});
+			// Exibir a seção do mês selecionado
+			document.getElementById('frutas-' + mes).style.display = 'block';
+		}
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  	<meta name="description" content="Site de frutas frescas direto da feira para sua casa. Confira nossas frutas da estação e receitas especiais!">
+ 	<meta name="keywords" content="frutas frescas, feira, entrega de frutas, alimentação saudável">
+ 	<meta name="author" content="Manoel Frutas">
+
+  	<!-- Inclusão do CSS do Leaflet -->
+  	<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  	<style>
+  		*{
+  			margin: 0;
+  			padding: 0;
+  		}
+		body {margin: 0}
+
+		ul.topnav {
+ 	 	list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+  		overflow: hidden;
+  		background-color: #3b683d;
+		}
+
+		ul.topnav li {float: left;}
+
+		ul.topnav li a {
+  		display: block;
+  		color: white;
+  		text-align: center;
+  		padding: 14px 16px;
+  		text-decoration: none;
+		}
+
+		ul.topnav li a:hover:not(.active) {background-color: #d67a16;}
+
+		ul.topnav li a.active {background-color: #f7931e;}
+
+		ul.topnav li.right {float: right;}
+
+		div.col-sm-12{
+			height: auto;
+			max-width: 100%;
+			text-align: center;
+			justify-content: center;
+			align-items: center;
+			padding: 10px;
+			
+		}
+
+
+		div.col-sm-4{
+			height: auto;
+			text-align: center;
+			justify-content: center;
+			align-items: center;
+			padding: 10px;		
+		}
+
+		h1 {
+			background-color: #f7931e;
+		}
+
+		div.carousel {
+    	width: 70%;             /* Define a largura do carrossel */
+    	margin: 0 auto;         /* Centraliza horizontalmente */
+    	max-width: 500px;       /* Limita a largura máxima do carrossel */
+		}
+
+		div..carousel-inner {
+            display: flex;
+            justify-content: center; /* Centraliza os itens horizontalmente */
+            align-items: center;     /* Centraliza verticalmente */
+        }
+
+		div.carousel-item img {
+    	width: 100%;            /* As imagens irão preencher 100% da largura do item */
+   		height: auto;           /* A altura será ajustada automaticamente para manter a proporção */
+   		object-fit: contain;    /* Garante que as imagens sejam exibidas corretamente */
+		}
+
+		#map1, #map2, #map3, #map4 {
+			height: 200px; /* Tamanho do mapa */
+			width: 40%;   /* Largura do mapa */
+			margin-top: 10px; /* Adiciona espaço entre o conteúdo e o mapa */
+		}
+
+
+		
+
+		/* Alinha os mapas na parte inferior de cada coluna */
+        .col-sm-6 {
+            display: flex;
+            flex-direction: column;  /* Organiza o conteúdo em coluna (textos no topo, mapa no fundo) */
+            justify-content: space-between;
+            height: auto;  /* Altura fixa para garantir que os mapas fiquem na parte inferior */
+            padding: 10px;
+        }
+
+
+
+        footer {
+    	background-color: #3b683d;
+    	color: white;
+    	padding: 20px;
+    	text-align: center;
+		}
+
+			.footer-content {
+    		display: flex;
+    		justify-content: space-between;
+    		align-items: center;
+    		max-width: 1200px;
+    		margin: 0 auto;
+			}
+
+			.address {
+    		flex: 1;
+    		text-align: left;
+			}
+
+			.social-media {
+    		flex: 1;
+    		text-align: right;
+			}
+
+			.social-icon {
+   			 margin: 0 10px;
+    		display: inline-block;
+			}
+
+			.social-icon img {
+    		width: 30px; /* Tamanho dos ícones */
+    		height: auto;
+			}
+
+			.social-icon img:hover {
+    		transform: scale(1.1); /* Aumenta ligeiramente o ícone ao passar o mouse */
+			}
+
+			.social-icon:hover {
+   			 opacity: 0.7; /* Efeito de hover nos ícones */
+			}
+			@media screen and (max-width: 600px) {
+	  	ul.topnav li.right, 
+  		ul.topnav li {float: none;}
+  		.container {
+  			margin-left: 0;
+  			margin-right: 0;
+  		}
+		}
+       
+	</style>
+
+	<title>Início</title>
+</head>
+<body>
+	<ul class="topnav">
+  		<li><a class="active" href="index.html">Início</a></li>
+  		<li><a href="frutas.html">Frutas</a></li>
+  		<li><a href="receitas.html">Receitas</a></li>
+  		<li class="right"><a href="sobre.html">Sobre</a></li>
+	</ul>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">	
+				<img src="imagem/manoelfrutas.png" alt="Logo Manoel frutas" width="50%"><br><br>
+				<h2><em> "Frutas frescas direto para você"</em></h2><hr>
+			</div>	
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">	
+				<h1> Frutas da Época</h1>
+			</div>	
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/abacaxipe.png" alt="abacaxi" width="100%" loading="lazy"><br>
+				<h3>Abacaxi Pérola:</h3>
+				<p>Tradicionalmente da Bahia, essa é a época de maior produção da fruta.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/acerola.png" alt="acerola" width="100%" loading="lazy"><br>
+				<h3>Acerola:</h3>
+				<p>Fruta produzida principalmente na região nordeste do Brasil, utilizada em especial para fazer sucos.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/ameixa.png" alt="ameixa" width="100%" loading="lazy"><br>
+				<h3>Ameixa:</h3>
+				<p>Produzida no sul do Brasil e em Minas Gerais, o Rio Grande do Sul é responsável por 42% da produção nacional.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/caju.png" alt="caju" width="100%" loading="lazy"><br>
+				<h3>Caju:</h3>
+				<p>Esse é um pseudofruto, produzido no nordeste, de origem brasileira. Diferente do pensamento popular, a castanha é a verdadeira fruta, a outra parte, utilizada principalmente em sucos, é uma parte floral.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/laranjali.png" alt="laranja lima" width="100%" loading="lazy"><br>
+				<h3>Laranja Lima:</h3>
+				<p>Surgiu no sudeste da Ásia, possui pouca acidez, ideal para o consumo de crianças, indicada para pessoas com complicações gástricas.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/lanjape.png" alt="lichia" width="100%" loading="lazy"><br>
+				<h3>Laranja Pêra:</h3>
+				<p>Fruta típica da região sudeste, sendo o estado de São Paulo o principal produtor da fruta. Rica em vitamina C, cálcio, potássio e vitaminas do complexo B.</p>
+			</div>
+			
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="imagem/lichia1.png" alt="lichia" width="100%" loading="lazy"><br>
+				<h3>Lichia:</h3>
+				<p>Fruta original da África e Asia, ela tem preços elevados devido a dificuldade e demora do cultivo. Sua árvore produz há cada dois anos.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/rosada.png" alt="uva" width="100%" loading="lazy"><br>
+				<h3>Uvas:</h3>
+				<p>Produzida no nordeste brasileiro, oferece grande variedade no final de ano, devido a alta produção nessa epóca. Variações: Rosada (de natal), Itália, rubi, sem semente, dentre outras.</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="imagem/roma.png" alt="roma" width="100%" loading="lazy"><br>
+				<h3>Romã:</h3>
+				<p>Natural do mediterrâneo, é uma fruta produzida no sul do Brasil. Muito indicado no tratamento de infecções, prncipalmente na gargante, através de chá, suco, gargarejo ou pelo consumo in natura.</p>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="demo" class="carousel slide" data-ride="carousel">
+
+  		<!-- Indicators -->
+ 		<ul class="carousel-indicators">
+   			<li data-target="#demo" data-slide-to="0" class="active"></li>
+    		<li data-target="#demo" data-slide-to="1"></li>
+    		<li data-target="#demo" data-slide-to="2"></li>
+  		</ul>
+  
+  		<!-- The slideshow -->
+  	<div class="carousel-inner">
+    	<div class="carousel-item active">
+      		<img src="imagem/abacate.png" alt="Abacate" width="30%">
+    	</div>
+
+    	<div class="carousel-item">
+      		<img src="imagem/abacaxipe.png" alt="Abacaxi" width="30%">
+    	</div>
+    	<div class="carousel-item">
+      		<img src="imagem/acerola.png" alt="Acerola" width="30%">
+    	</div>
+    	<div class="carousel-item">
+      		<img src="imagem/achachairu.png" alt="Achachairu" width="30%">
+    	</div>
+    	<div class="carousel-item">
+      		<img src="imagem/ameixa.png" alt="Ameixa" width="30%">
+    	</div>
+    	<div class="carousel-item">
+      		<img src="imagem/laranjali.png" alt="Laranja Lima" width="30%">
+    	</div>
+    	<div class="carousel-item">
+      		<img src="imagem/lanjape.png" alt="Laranja Pêra" width="30%">
+    	</div>
+    	<div class="carousel-item">
+      		<img src="imagem/lichia1.png" alt="Lichia" width="30%">
+    	</div>
+  	</div>
+  
+  		<!-- Left and right controls -->
+  		<a class="carousel-control-prev" href="#demo" data-slide="prev">
+    		<span class="carousel-control-prev-icon"></span>
+  		</a>
+  		<a class="carousel-control-next" href="#demo" data-slide="next">
+    		<span class="carousel-control-next-icon"></span>
+ 	 	</a>
+	</div>
+	<br><br>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+ 		<h1>Localização das feiras</h1><hr>
+ 		</div>
+ 	</div> 
+
+	<!-- Mapa para o endereço Vila Isa -->
+		<div class="row">
+			<div class="col-sm-6">
+				<h4>Quarta-feira:</h4> <br>
+				<p>Vila Isa, São Paulo</p>
+				<div id="map4"></div><br>
+				<p><b>Horário de funcionamento:</b> das 8h às 14h</p>
+			</div><hr>
+		
+	<!-- Mapa para o primeiro endereço -->
+			<div class="col-sm-6">
+				<h4>Quinta-feira e Domingo:</h4> <br>
+				<p>Av. Augusto de Castro - Pedreira, São Paulo</p>
+				<div id="map1"></div><br>
+				<p><b>Horário de funcionamento:</b> das 7h às 14h30</p>
+			</div><hr>
+		</div>
+
+		<!-- Mapa para o segundo endereço -->
+		<div class="row">
+			<div class="col-sm-6">
+				<h4>Sexta-feira:</h4> <br>
+				<p>Rua Francisco Correia Vasques - Cidade Dutra, São Paulo</p>
+				<div id="map2"></div><br>
+				<p><b>Horário de funcionamento:</b> das 8h às 14h</p>
+			</div><hr>
+
+		<!-- Mapa para o terceiro endereço -->
+			<div class="col-sm-6">
+				<h4>Sabado:</h4> <br>
+				<p> R. Francisco Barreto - Cidade Dutra, São Paulo</p>
+				<div id="map3"></div><br>
+				<p><b>Horário de funcionamento:</b> das 7h às 14h</p>
+			</div>
+		</div><hr>
+
+	</div>
+
+	<!-- Inclusão dos scripts do Leaflet -->
+	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+	<script>
+
+		var map4 = L.map('map4').setView([-23.706667, -46.712500], 16);  // Coordenadas para a Vila Isa
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map4);
+		L.marker([-23.706667, -46.712500]).addTo(map4)
+			.bindPopup('<b>Vila Isa</b><br>São Paulo, SP')
+			.openPopup();
+
+		// Mapa para o primeiro endereço (Av. Augusto de Castro - Pedreira)
+		var map1 = L.map('map1').setView([-23.642453, -46.634167], 16);  // Coordenadas aproximadas
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map1);
+		L.marker([-23.642453, -46.634167]).addTo(map1)
+			.bindPopup('<b>Av. Augusto de Castro - Pedreira</b><br>São Paulo, SP')
+			.openPopup();
+
+		// Mapa para o segundo endereço (Rua Francisco Correia Vasques - Cidade Dutra)
+		var map2 = L.map('map2').setView([-23.754327, -46.722067], 16);  // Coordenadas aproximadas
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map2);
+		L.marker([-23.754327, -46.722067]).addTo(map2)
+			.bindPopup('<b>Rua Francisco Correia Vasques - Cidade Dutra</b><br>São Paulo, SP')
+			.openPopup();
+
+		// Mapa para o terceiro endereço (R. Francisco Barreto - Cidade Dutra)
+		var map3 = L.map('map3').setView([-23.752498, -46.730568], 16);  // Coordenadas aproximadas
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map3);
+		L.marker([-23.752498, -46.730568]).addTo(map3)
+			.bindPopup('<b>R. Francisco Barreto - Cidade Dutra</b><br>São Paulo, SP')
+			.openPopup();
+
+	 </script>
+
+
+	 <footer>
+        <div class="footer-content">
+            <!-- Endereço -->
+            <div class="contato">
+                <p>Contato: (11) 94004-6028</p>
+            </div>
+
+            <!-- Redes Sociais -->
+            <div class="social-media">
+                <a href="https://wa.me/5511940137658" target="_blank" class="social-icon">
+        			<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+    			</a>
+                <a href="https://www.instagram.com" target="_blank" class="social-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+                </a>
+               
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
